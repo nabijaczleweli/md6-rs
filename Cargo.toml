@@ -1,0 +1,20 @@
+[package]
+name = "md6"
+description = "Implementation of the MD6 hash function for Rust via FFI"
+documentation = "https://cdn.rawgit.com/nabijaczleweli/md6-rs/doc/md6/index.htmlhtml"
+repository = "https://github.com/nabijaczleweli/md6-rs"
+readme = "README.md"
+keywords = ["hash", "md6"]
+license = "MIT"
+# Remember to also update in appveyor.yml
+version = "1.0.0"
+authors = ["nabijaczleweli <nabijaczleweli@gmail.com>"]
+exclude = ["*.enc"]
+build = "build.rs"
+
+
+[dependencies]
+libc = "0.2"
+
+[build-dependencies]
+gcc = "0.3"
