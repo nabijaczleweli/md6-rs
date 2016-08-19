@@ -1,25 +1,25 @@
 /* File:    md6_nist.h
 ** Author:  Ronald L. Rivest
-** Address: Room 32G-692 Stata Center 
-**          32 Vassar Street 
+** Address: Room 32G-692 Stata Center
+**          32 Vassar Street
 **          Cambridge, MA 02139
 ** Email:   rivest@mit.edu
 ** Date:    9/25/2008
 **
 ** (The following license is known as "The MIT License")
-** 
+**
 ** Copyright (c) 2008 Ronald L. Rivest
-** 
+**
 ** Permission is hereby granted, free of charge, to any person obtaining a copy
 ** of this software and associated documentation files (the "Software"), to deal
 ** in the Software without restriction, including without limitation the rights
 ** to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 ** copies of the Software, and to permit persons to whom the Software is
 ** furnished to do so, subject to the following conditions:
-** 
+**
 ** The above copyright notice and this permission notice shall be included in
 ** all copies or substantial portions of the Software.
-** 
+**
 ** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 ** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 ** FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -58,20 +58,20 @@ typedef enum { SUCCESS = 0, FAIL = 1, BAD_HASHLEN = 2 } HashReturn;
 
 typedef md6_state hashState;
 
-HashReturn Init( hashState *state, 
+HashReturn MD6_Hash_Init( hashState *state,
 		 int hashbitlen
 		 );
 
-HashReturn Update( hashState *state, 
-		   const BitSequence *data, 
+HashReturn MD6_Hash_Update( hashState *state,
+		   const BitSequence *data,
 		   DataLength databitlen
 		   );
 
-HashReturn Final( hashState *state,
+HashReturn MD6_Hash_Final( hashState *state,
 		  BitSequence *hashval
 		  );
 
-HashReturn Hash( int hashbitlen,
+HashReturn MD6_Hash_Hash( int hashbitlen,
 		 const BitSequence *data,
 		 DataLength databitlen,
 		 BitSequence *hashval

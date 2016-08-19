@@ -8,11 +8,11 @@ pub type FFIHashState = *mut c_void;
 
 #[link(name = "md6")]
 extern "C" {
-    pub fn Init(state: FFIHashState, hashbitlen: c_int) -> c_int;
-    pub fn Update(state: FFIHashState, data: *const u8, databitlen: u64) -> c_int;
-    pub fn Final(state: FFIHashState, hashval: *mut u8) -> c_int;
+    pub fn MD6_Hash_Init(state: FFIHashState, hashbitlen: c_int) -> c_int;
+    pub fn MD6_Hash_Update(state: FFIHashState, data: *const u8, databitlen: u64) -> c_int;
+    pub fn MD6_Hash_Final(state: FFIHashState, hashval: *mut u8) -> c_int;
 
-    pub fn Hash(hashbitlen: c_int, data: *const u8, databitlen: u64, hashval: *mut u8) -> c_int;
+    pub fn MD6_Hash_Hash(hashbitlen: c_int, data: *const u8, databitlen: u64, hashval: *mut u8) -> c_int;
 }
 
 pub fn malloc_hash_state() -> FFIHashState {

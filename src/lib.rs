@@ -112,7 +112,7 @@ pub type Result<T> = std::result::Result<T, Md6Error>;
 ///                 0xDF, 0x4E, 0x6D, 0xEA, 0xA0, 0xF8, 0xE0, 0xC0]);
 /// ```
 pub fn hash(hashbitlen: i32, data: &[u8], hashval: &mut [u8]) -> Result<()> {
-    match unsafe { native::Hash(hashbitlen, data.as_ptr(), data.len() as u64 * 8, hashval.as_mut_ptr()) } {
+    match unsafe { native::MD6_Hash_Hash(hashbitlen, data.as_ptr(), data.len() as u64 * 8, hashval.as_mut_ptr()) } {
         0 => Ok(()),
         e => Err(Md6Error::from(e)),
     }
@@ -185,7 +185,7 @@ impl Md6 {
     pub fn new(hashbitlen: i32) -> Result<Md6> {
         let mut raw_state = native::malloc_hash_state();
 
-        match unsafe { native::Init(raw_state, hashbitlen) } {
+        match unsafe { native::MD6_Hash_Init(raw_state, hashbitlen) } {
             0 => Ok(Md6 { raw_state: raw_state }),
             e => {
                 native::free_hash_state(&mut raw_state);
@@ -224,7 +224,7 @@ impl Md6 {
     /// ```
     pub fn update(&self, data: &[u8]) {
         unsafe {
-            native::Update(self.raw_state, data.as_ptr(), data.len() as u64 * 8);
+            native::MD6_Hash_Update(self.raw_state, data.as_ptr(), data.len() as u64 * 8);
         }
     }
 
@@ -283,7 +283,7 @@ impl Md6 {
     /// ```
     pub fn finalise(&self, hashval: &mut [u8]) {
         unsafe {
-            native::Final(self.raw_state, hashval.as_mut_ptr());
+            native::MD6_Hash_Final(self.raw_state, hashval.as_mut_ptr());
         }
     }
 }
