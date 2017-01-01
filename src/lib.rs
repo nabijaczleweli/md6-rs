@@ -9,9 +9,8 @@
 //! Hashing a single chunk of data with a 256-bit MD6 hash function, then verifying the result.
 //!
 //! ```
-//! extern crate md6;
+//! # use md6::Md6;
 //! # use std::iter::FromIterator;
-//!
 //! let mut result = [0; 32];
 //! md6::hash(256, b"The lazy fox jumps over the lazy dog", &mut result).unwrap();
 //!
@@ -25,11 +24,10 @@
 //! Hashing multiple chunks of data with a 512-bit MD6 hash function, then verifying the result.
 //!
 //! ```
-//! extern crate md6;
+//! # use md6::Md6;
 //! # use std::iter::FromIterator;
-//!
 //! let mut result = [0; 64];
-//! let state = md6::Md6::new(512).unwrap();
+//! let state = Md6::new(512).unwrap();
 //!
 //! state.update("Zażółć ".as_bytes());
 //! state.update("gęślą ".as_bytes());
@@ -51,13 +49,12 @@
 //! function.
 //!
 //! ```
-//! extern crate md6;
+//! # use md6::Md6;
 //! # use std::iter::FromIterator;
-//!
 //! let mut result_multi  = [0; 8];
 //! let mut result_single = [0; 8];
 //!
-//! let state = md6::Md6::new(64).unwrap();
+//! let state = Md6::new(64).unwrap();
 //! state.update("Zażółć ".as_bytes());
 //! state.update("gęślą ".as_bytes());
 //! state.update("jaźń".as_bytes());
@@ -89,7 +86,7 @@ pub type Result<T> = std::result::Result<T, Md6Error>;
 /// # Example
 ///
 /// ```
-/// # extern crate md6;
+/// # use md6::Md6;
 /// # use std::iter::FromIterator;
 /// let mut result_256 = [0; 32];
 /// let mut result_512 = [0; 64];
@@ -126,9 +123,9 @@ pub fn hash(hashbitlen: i32, data: &[u8], hashval: &mut [u8]) -> Result<()> {
 /// Hashing a string split into multiple chunks.
 ///
 /// ```
-/// # extern crate md6;
+/// # use md6::Md6;
 /// # use std::iter::FromIterator;
-/// let state = md6::Md6::new(256).unwrap();
+/// let state = Md6::new(256).unwrap();
 ///
 /// state.update(b"Abolish ");
 /// state.update(b"the ");
@@ -190,16 +187,16 @@ impl Md6 {
     /// Incorrect `hashbitlen`
     ///
     /// ```
-    /// # extern crate md6;
-    /// assert_eq!(md6::Md6::new(0).map(|_| ()), Err(md6::Md6Error::BadHashbitlen));
-    /// assert_eq!(md6::Md6::new(1024).map(|_| ()), Err(md6::Md6Error::BadHashbitlen));
+    /// # use md6::Md6;
+    /// assert_eq!(Md6::new(0).map(|_| ()), Err(md6::Md6Error::BadHashbitlen));
+    /// assert_eq!(Md6::new(1024).map(|_| ()), Err(md6::Md6Error::BadHashbitlen));
     /// ```
     ///
     /// Creating a 512-long state
     ///
     /// ```
-    /// # extern crate md6;
-    /// md6::Md6::new(512).unwrap();
+    /// # use md6::Md6;
+    /// Md6::new(512).unwrap();
     /// ```
     pub fn new(hashbitlen: i32) -> Result<Md6> {
         let mut raw_state = native::malloc_hash_state();
@@ -220,11 +217,11 @@ impl Md6 {
     /// Hashing a part of [a short story](http://nabijaczleweli.xyz/capitalism/writing/Świat_to_kilka_takich_pokoi/)
     ///
     /// ```
-    /// # extern crate md6;
+    /// # use md6::Md6;
     /// # use std::iter::FromIterator;
     /// let mut result = [0; 64];
     ///
-    /// let state = md6::Md6::new(512).unwrap();
+    /// let state = Md6::new(512).unwrap();
     /// state.update("    Serbiańcy znowu się pochlali, ale w sumie".as_bytes());
     /// state.update("czegoż się po wschodnich słowianach spodziewać, swoją".as_bytes());
     /// state.update("drogą. I, jak to wszystkim homo sapiensom się dzieje".as_bytes());
@@ -258,17 +255,17 @@ impl Md6 {
     /// Storing and verifying results of all possible sizes.
     ///
     /// ```
-    /// # extern crate md6;
+    /// # use md6::Md6;
     /// # use std::iter::FromIterator;
     /// let mut result_64  = [0; 8];
     /// let mut result_128 = [0; 16];
     /// let mut result_256 = [0; 32];
     /// let mut result_512 = [0; 64];
     ///
-    /// let state_64  = md6::Md6::new(64) .unwrap();
-    /// let state_128 = md6::Md6::new(128).unwrap();
-    /// let state_256 = md6::Md6::new(256).unwrap();
-    /// let state_512 = md6::Md6::new(512).unwrap();
+    /// let state_64  = Md6::new(64) .unwrap();
+    /// let state_128 = Md6::new(128).unwrap();
+    /// let state_256 = Md6::new(256).unwrap();
+    /// let state_512 = Md6::new(512).unwrap();
     ///
     /// state_64 .update(b"The lazy fox jumps over the lazy dog.");
     /// state_128.update(b"The lazy fox jumps over the lazy dog.");
