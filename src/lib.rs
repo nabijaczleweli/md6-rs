@@ -75,6 +75,7 @@ mod native;
 
 use std::error::Error;
 use std::fmt;
+use std::io;
 
 
 /// Helper result type containing `Md6Error`.
@@ -141,6 +142,24 @@ pub fn hash(hashbitlen: i32, data: &[u8], hashval: &mut [u8]) -> Result<()> {
 ///                 0x25, 0xC5, 0xD4, 0xDB, 0x37, 0xB8, 0x99, 0x12,
 ///                 0x16, 0x2E, 0xFD, 0xF4, 0xDA, 0xC2, 0x2C, 0xFF,
 ///                 0xE6, 0x27, 0xF1, 0x11, 0xEC, 0x05, 0x2F, 0xB5]);
+/// ```
+///
+/// A `Write` implementation is also provided:
+///
+/// ```
+/// # use std::iter::FromIterator;
+/// # use md6::Md6;
+/// # use std::io;
+/// let mut state = Md6::new(256).unwrap();
+/// io::copy(&mut &b"The lazy fox jumps over the lazy dog."[..], &mut state).unwrap();
+///
+/// let mut result = [0; 32];
+/// state.finalise(&mut result);
+/// assert_eq!(Vec::from_iter(result.iter().map(|&i| i)),
+///            vec![0x06, 0x60, 0xBB, 0x89, 0x85, 0x06, 0xE4, 0xD9,
+///                 0x29, 0x8C, 0xD1, 0xB0, 0x40, 0x73, 0x49, 0x60,
+///                 0x47, 0x3E, 0x25, 0xA4, 0x9D, 0x52, 0x34, 0xBB,
+///                 0x2A, 0xCA, 0x31, 0x57, 0xD1, 0xAF, 0x27, 0xAA]);
 /// ```
 pub struct Md6 {
     raw_state: native::FFIHashState,
@@ -285,6 +304,37 @@ impl Md6 {
         unsafe {
             native::MD6_Hash_Final(self.raw_state, hashval.as_mut_ptr());
         }
+    }
+}
+
+/// The `Write` implementation updates the state with the provided data.
+///
+/// For example, to hash a file:
+///
+/// ```
+/// # use std::iter::FromIterator;
+/// # use std::fs::File;
+/// # use md6::Md6;
+/// # use std::io;
+/// let mut state = Md6::new(256).unwrap();
+/// io::copy(&mut File::open("LICENSE").unwrap(), &mut state).unwrap();
+///
+/// let mut result = [0; 32];
+/// state.finalise(&mut result);
+/// assert_eq!(Vec::from_iter(result.iter().map(|&i| i)),
+///            vec![0xB7, 0x82, 0xA1, 0xEA, 0xDE, 0xC5, 0x46, 0x3E,
+///                 0x1D, 0xCF, 0x56, 0xA2, 0xD7, 0x52, 0x23, 0x82,
+///                 0xA3, 0x02, 0xE6, 0xB6, 0x1D, 0x45, 0xA8, 0xBF,
+///                 0x95, 0x12, 0x92, 0x1E, 0xAD, 0x21, 0x3E, 0x47]);
+/// ```
+impl io::Write for Md6 {
+    fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
+        self.update(buf);
+        Ok(buf.len())
+    }
+
+    fn flush(&mut self) -> io::Result<()> {
+        Ok(())
     }
 }
 
