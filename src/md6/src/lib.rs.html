@@ -412,9 +412,6 @@
 <span id="368">368</span>
 <span id="369">369</span>
 <span id="370">370</span>
-<span id="371">371</span>
-<span id="372">372</span>
-<span id="373">373</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! An implementation of the [MD6 hash function](http://groups.csail.mit.edu/cis/md6), via FFI to reference implementation.</span>
 <span class='doccomment'>//!</span>
@@ -427,9 +424,8 @@
 <span class='doccomment'>//! Hashing a single chunk of data with a 256-bit MD6 hash function, then verifying the result.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```</span>
-<span class='doccomment'>//! extern crate md6;</span>
+<span class='doccomment'>//! # use md6::Md6;</span>
 <span class='doccomment'>//! # use std::iter::FromIterator;</span>
-<span class='doccomment'>//!</span>
 <span class='doccomment'>//! let mut result = [0; 32];</span>
 <span class='doccomment'>//! md6::hash(256, b&quot;The lazy fox jumps over the lazy dog&quot;, &amp;mut result).unwrap();</span>
 <span class='doccomment'>//!</span>
@@ -443,11 +439,10 @@
 <span class='doccomment'>//! Hashing multiple chunks of data with a 512-bit MD6 hash function, then verifying the result.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```</span>
-<span class='doccomment'>//! extern crate md6;</span>
+<span class='doccomment'>//! # use md6::Md6;</span>
 <span class='doccomment'>//! # use std::iter::FromIterator;</span>
-<span class='doccomment'>//!</span>
 <span class='doccomment'>//! let mut result = [0; 64];</span>
-<span class='doccomment'>//! let state = md6::Md6::new(512).unwrap();</span>
+<span class='doccomment'>//! let state = Md6::new(512).unwrap();</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! state.update(&quot;Zażółć &quot;.as_bytes());</span>
 <span class='doccomment'>//! state.update(&quot;gęślą &quot;.as_bytes());</span>
@@ -469,13 +464,12 @@
 <span class='doccomment'>//! function.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```</span>
-<span class='doccomment'>//! extern crate md6;</span>
+<span class='doccomment'>//! # use md6::Md6;</span>
 <span class='doccomment'>//! # use std::iter::FromIterator;</span>
-<span class='doccomment'>//!</span>
 <span class='doccomment'>//! let mut result_multi  = [0; 8];</span>
 <span class='doccomment'>//! let mut result_single = [0; 8];</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! let state = md6::Md6::new(64).unwrap();</span>
+<span class='doccomment'>//! let state = Md6::new(64).unwrap();</span>
 <span class='doccomment'>//! state.update(&quot;Zażółć &quot;.as_bytes());</span>
 <span class='doccomment'>//! state.update(&quot;gęślą &quot;.as_bytes());</span>
 <span class='doccomment'>//! state.update(&quot;jaźń&quot;.as_bytes());</span>
@@ -507,7 +501,7 @@
 <span class='doccomment'>/// # Example</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
-<span class='doccomment'>/// # extern crate md6;</span>
+<span class='doccomment'>/// # use md6::Md6;</span>
 <span class='doccomment'>/// # use std::iter::FromIterator;</span>
 <span class='doccomment'>/// let mut result_256 = [0; 32];</span>
 <span class='doccomment'>/// let mut result_512 = [0; 64];</span>
@@ -544,9 +538,9 @@
 <span class='doccomment'>/// Hashing a string split into multiple chunks.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
-<span class='doccomment'>/// # extern crate md6;</span>
+<span class='doccomment'>/// # use md6::Md6;</span>
 <span class='doccomment'>/// # use std::iter::FromIterator;</span>
-<span class='doccomment'>/// let state = md6::Md6::new(256).unwrap();</span>
+<span class='doccomment'>/// let state = Md6::new(256).unwrap();</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// state.update(b&quot;Abolish &quot;);</span>
 <span class='doccomment'>/// state.update(b&quot;the &quot;);</span>
@@ -608,16 +602,16 @@
     <span class='doccomment'>/// Incorrect `hashbitlen`</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// # extern crate md6;</span>
-    <span class='doccomment'>/// assert_eq!(md6::Md6::new(0).map(|_| ()), Err(md6::Md6Error::BadHashbitlen));</span>
-    <span class='doccomment'>/// assert_eq!(md6::Md6::new(1024).map(|_| ()), Err(md6::Md6Error::BadHashbitlen));</span>
+    <span class='doccomment'>/// # use md6::Md6;</span>
+    <span class='doccomment'>/// assert_eq!(Md6::new(0).map(|_| ()), Err(md6::Md6Error::BadHashbitlen));</span>
+    <span class='doccomment'>/// assert_eq!(Md6::new(1024).map(|_| ()), Err(md6::Md6Error::BadHashbitlen));</span>
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Creating a 512-long state</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// # extern crate md6;</span>
-    <span class='doccomment'>/// md6::Md6::new(512).unwrap();</span>
+    <span class='doccomment'>/// # use md6::Md6;</span>
+    <span class='doccomment'>/// Md6::new(512).unwrap();</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>hashbitlen</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Md6</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>raw_state</span> <span class='op'>=</span> <span class='ident'>native</span>::<span class='ident'>malloc_hash_state</span>();
@@ -638,11 +632,11 @@
     <span class='doccomment'>/// Hashing a part of [a short story](http://nabijaczleweli.xyz/capitalism/writing/Świat_to_kilka_takich_pokoi/)</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// # extern crate md6;</span>
+    <span class='doccomment'>/// # use md6::Md6;</span>
     <span class='doccomment'>/// # use std::iter::FromIterator;</span>
     <span class='doccomment'>/// let mut result = [0; 64];</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let state = md6::Md6::new(512).unwrap();</span>
+    <span class='doccomment'>/// let state = Md6::new(512).unwrap();</span>
     <span class='doccomment'>/// state.update(&quot;    Serbiańcy znowu się pochlali, ale w sumie&quot;.as_bytes());</span>
     <span class='doccomment'>/// state.update(&quot;czegoż się po wschodnich słowianach spodziewać, swoją&quot;.as_bytes());</span>
     <span class='doccomment'>/// state.update(&quot;drogą. I, jak to wszystkim homo sapiensom się dzieje&quot;.as_bytes());</span>
@@ -676,17 +670,17 @@
     <span class='doccomment'>/// Storing and verifying results of all possible sizes.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
-    <span class='doccomment'>/// # extern crate md6;</span>
+    <span class='doccomment'>/// # use md6::Md6;</span>
     <span class='doccomment'>/// # use std::iter::FromIterator;</span>
     <span class='doccomment'>/// let mut result_64  = [0; 8];</span>
     <span class='doccomment'>/// let mut result_128 = [0; 16];</span>
     <span class='doccomment'>/// let mut result_256 = [0; 32];</span>
     <span class='doccomment'>/// let mut result_512 = [0; 64];</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let state_64  = md6::Md6::new(64) .unwrap();</span>
-    <span class='doccomment'>/// let state_128 = md6::Md6::new(128).unwrap();</span>
-    <span class='doccomment'>/// let state_256 = md6::Md6::new(256).unwrap();</span>
-    <span class='doccomment'>/// let state_512 = md6::Md6::new(512).unwrap();</span>
+    <span class='doccomment'>/// let state_64  = Md6::new(64) .unwrap();</span>
+    <span class='doccomment'>/// let state_128 = Md6::new(128).unwrap();</span>
+    <span class='doccomment'>/// let state_256 = Md6::new(256).unwrap();</span>
+    <span class='doccomment'>/// let state_512 = Md6::new(512).unwrap();</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// state_64 .update(b&quot;The lazy fox jumps over the lazy dog.&quot;);</span>
     <span class='doccomment'>/// state_128.update(b&quot;The lazy fox jumps over the lazy dog.&quot;);</span>

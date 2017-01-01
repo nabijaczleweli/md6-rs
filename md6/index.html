@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/md6/src/lib.rs.html#1-373' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-0' class='srclink' href='../src/md6/src/lib.rs.html#1-370' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>An implementation of the <a href="http://groups.csail.mit.edu/cis/md6">MD6 hash function</a>, via FFI to reference implementation.</p>
 
 <p>For more information about MD6 visit its <a href="http://groups.csail.mit.edu/cis/md6">official homepage</a>.</p>
@@ -58,8 +58,6 @@
 <p>Hashing a single chunk of data with a 256-bit MD6 hash function, then verifying the result.</p>
 
 <pre class='rust rust-example-rendered'>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>md6</span>;
-
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>result</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>32</span>];
 <span class='ident'>md6</span>::<span class='ident'>hash</span>(<span class='number'>256</span>, <span class='string'>b&quot;The lazy fox jumps over the lazy dog&quot;</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>result</span>).<span class='ident'>unwrap</span>();
 
@@ -72,10 +70,8 @@
 <p>Hashing multiple chunks of data with a 512-bit MD6 hash function, then verifying the result.</p>
 
 <pre class='rust rust-example-rendered'>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>md6</span>;
-
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>result</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>64</span>];
-<span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>md6</span>::<span class='ident'>Md6</span>::<span class='ident'>new</span>(<span class='number'>512</span>).<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Md6</span>::<span class='ident'>new</span>(<span class='number'>512</span>).<span class='ident'>unwrap</span>();
 
 <span class='ident'>state</span>.<span class='ident'>update</span>(<span class='string'>&quot;Zażółć &quot;</span>.<span class='ident'>as_bytes</span>());
 <span class='ident'>state</span>.<span class='ident'>update</span>(<span class='string'>&quot;gęślą &quot;</span>.<span class='ident'>as_bytes</span>());
@@ -96,12 +92,10 @@
 function.</p>
 
 <pre class='rust rust-example-rendered'>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>md6</span>;
-
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>result_multi</span>  <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>8</span>];
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>result_single</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>8</span>];
 
-<span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>md6</span>::<span class='ident'>Md6</span>::<span class='ident'>new</span>(<span class='number'>64</span>).<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Md6</span>::<span class='ident'>new</span>(<span class='number'>64</span>).<span class='ident'>unwrap</span>();
 <span class='ident'>state</span>.<span class='ident'>update</span>(<span class='string'>&quot;Zażółć &quot;</span>.<span class='ident'>as_bytes</span>());
 <span class='ident'>state</span>.<span class='ident'>update</span>(<span class='string'>&quot;gęślą &quot;</span>.<span class='ident'>as_bytes</span>());
 <span class='ident'>state</span>.<span class='ident'>update</span>(<span class='string'>&quot;jaźń&quot;</span>.<span class='ident'>as_bytes</span>());
