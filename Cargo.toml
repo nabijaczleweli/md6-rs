@@ -5,6 +5,7 @@ documentation = "https://cdn.rawgit.com/nabijaczleweli/md6-rs/doc/md6/index.html
 repository = "https://github.com/nabijaczleweli/md6-rs"
 readme = "README.md"
 keywords = ["hash", "md6"]
+categories = ["algorithms"]
 license = "MIT"
 # Remember to also update in appveyor.yml
 version = "1.1.0"
