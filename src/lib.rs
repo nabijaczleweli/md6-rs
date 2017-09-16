@@ -27,7 +27,7 @@
 //! # use md6::Md6;
 //! # use std::iter::FromIterator;
 //! let mut result = [0; 64];
-//! let state = Md6::new(512).unwrap();
+//! let mut state = Md6::new(512).unwrap();
 //!
 //! state.update("Zażółć ".as_bytes());
 //! state.update("gęślą ".as_bytes());
@@ -54,7 +54,7 @@
 //! let mut result_multi  = [0; 8];
 //! let mut result_single = [0; 8];
 //!
-//! let state = Md6::new(64).unwrap();
+//! let mut state = Md6::new(64).unwrap();
 //! state.update("Zażółć ".as_bytes());
 //! state.update("gęślą ".as_bytes());
 //! state.update("jaźń".as_bytes());
@@ -125,7 +125,7 @@ pub fn hash(hashbitlen: i32, data: &[u8], hashval: &mut [u8]) -> Result<()> {
 /// ```
 /// # use md6::Md6;
 /// # use std::iter::FromIterator;
-/// let state = Md6::new(256).unwrap();
+/// let mut state = Md6::new(256).unwrap();
 ///
 /// state.update(b"Abolish ");
 /// state.update(b"the ");
@@ -221,7 +221,7 @@ impl Md6 {
     /// # use std::iter::FromIterator;
     /// let mut result = [0; 64];
     ///
-    /// let state = Md6::new(512).unwrap();
+    /// let mut state = Md6::new(512).unwrap();
     /// state.update("    Serbiańcy znowu się pochlali, ale w sumie".as_bytes());
     /// state.update("czegoż się po wschodnich słowianach spodziewać, swoją".as_bytes());
     /// state.update("drogą. I, jak to wszystkim homo sapiensom się dzieje".as_bytes());
@@ -238,7 +238,7 @@ impl Md6 {
     ///                 0x9D, 0xF8, 0xFD, 0x47, 0x0C, 0x4F, 0x2F, 0x4B,
     ///                 0xCD, 0xDF, 0xAF, 0x13, 0xE1, 0xE1, 0x4D, 0x9D]);
     /// ```
-    pub fn update(&self, data: &[u8]) {
+    pub fn update(&mut self, data: &[u8]) {
         unsafe {
             native::MD6_Hash_Update(self.raw_state, data.as_ptr(), data.len() as u64 * 8);
         }
@@ -262,10 +262,10 @@ impl Md6 {
     /// let mut result_256 = [0; 32];
     /// let mut result_512 = [0; 64];
     ///
-    /// let state_64  = Md6::new(64) .unwrap();
-    /// let state_128 = Md6::new(128).unwrap();
-    /// let state_256 = Md6::new(256).unwrap();
-    /// let state_512 = Md6::new(512).unwrap();
+    /// let mut state_64  = Md6::new(64) .unwrap();
+    /// let mut state_128 = Md6::new(128).unwrap();
+    /// let mut state_256 = Md6::new(256).unwrap();
+    /// let mut state_512 = Md6::new(512).unwrap();
     ///
     /// state_64 .update(b"The lazy fox jumps over the lazy dog.");
     /// state_128.update(b"The lazy fox jumps over the lazy dog.");
@@ -297,7 +297,7 @@ impl Md6 {
     ///                 0x82, 0xE8, 0x4E, 0xFC, 0x3C, 0x34, 0x5B, 0x0C,
     ///                 0xFF, 0x72, 0x1B, 0x56, 0x73, 0x05, 0x6B, 0x75]);
     /// ```
-    pub fn finalise(&self, hashval: &mut [u8]) {
+    pub fn finalise(&mut self, hashval: &mut [u8]) {
         unsafe {
             native::MD6_Hash_Final(self.raw_state, hashval.as_mut_ptr());
         }
