@@ -10,8 +10,11 @@
     <title>md6 - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../dark.css">
+    <link rel="stylesheet" type="text/css" href="../main.css" id="themeStyle">
+    <script src="../storage.js"></script>
     
 
     
@@ -28,10 +31,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
-        <p class='location'>Crate md6</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'md6', ty: 'mod', relpath: '../'};</script>
+        <p class='location'>Crate md6</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'md6', ty: 'mod', relpath: '../'};</script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -50,12 +61,9 @@
                    </a>
                </span><a class='srclink' href='../src/md6/lib.rs.html#1-370' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>An implementation of the <a href="http://groups.csail.mit.edu/cis/md6">MD6 hash function</a>, via FFI to reference implementation.</p>
-
 <p>For more information about MD6 visit its <a href="http://groups.csail.mit.edu/cis/md6">official homepage</a>.</p>
-
 <p>There are two APIs provided: one for single-chunk hashing and one for hashing of multiple data segments.</p>
-
-<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Hashing a single chunk of data with a 256-bit MD6 hash function, then verifying the result.</p>
 
 <pre class="rust rust-example-rendered">
@@ -67,7 +75,6 @@
                 <span class="number">0x2A</span>, <span class="number">0xC9</span>, <span class="number">0x8E</span>, <span class="number">0x24</span>, <span class="number">0x22</span>, <span class="number">0x9B</span>, <span class="number">0x3E</span>, <span class="number">0x90</span>,
                 <span class="number">0xDC</span>, <span class="number">0x06</span>, <span class="number">0x61</span>, <span class="number">0x77</span>, <span class="number">0xF8</span>, <span class="number">0xFB</span>, <span class="number">0x1A</span>, <span class="number">0x52</span>,
                 <span class="number">0x6E</span>, <span class="number">0x9D</span>, <span class="number">0xA2</span>, <span class="number">0xCC</span>, <span class="number">0x95</span>, <span class="number">0x71</span>, <span class="number">0x97</span>, <span class="number">0xAA</span>]);</pre>
-
 <p>Hashing multiple chunks of data with a 512-bit MD6 hash function, then verifying the result.</p>
 
 <pre class="rust rust-example-rendered">
@@ -88,7 +95,6 @@
                 <span class="number">0x7B</span>, <span class="number">0xAE</span>, <span class="number">0x46</span>, <span class="number">0x9F</span>, <span class="number">0x8D</span>, <span class="number">0x60</span>, <span class="number">0x5D</span>, <span class="number">0xED</span>,
                 <span class="number">0xFF</span>, <span class="number">0x51</span>, <span class="number">0x72</span>, <span class="number">0xDE</span>, <span class="number">0xA1</span>, <span class="number">0x6F</span>, <span class="number">0x00</span>, <span class="number">0xF7</span>,
                 <span class="number">0xB4</span>, <span class="number">0x82</span>, <span class="number">0xEF</span>, <span class="number">0x87</span>, <span class="number">0xED</span>, <span class="number">0x77</span>, <span class="number">0xD9</span>, <span class="number">0x1A</span>]);</pre>
-
 <p>Comparing result of single- and multi-chunk hash methods hashing the same effective message with a 64-bit MD6 hash
 function.</p>
 
@@ -113,6 +119,7 @@ function.</p>
                                   title='struct md6::Md6'>Md6</a></td>
                            <td class='docblock-short'>
                                 <p>Hashing state for multiple data sets.</p>
+
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
@@ -121,6 +128,7 @@ function.</p>
                                   title='enum md6::Md6Error'>Md6Error</a></td>
                            <td class='docblock-short'>
                                 <p>Some functions in the library can fail, this enum represents all the possible ways they can.</p>
+
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
@@ -129,6 +137,7 @@ function.</p>
                                   title='fn md6::hash'>hash</a></td>
                            <td class='docblock-short'>
                                 <p>Hash all data in one fell swoop.</p>
+
                            </td>
                        </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
@@ -137,6 +146,7 @@ function.</p>
                                   title='type md6::Result'>Result</a></td>
                            <td class='docblock-short'>
                                 <p>Helper result type containing <code>Md6Error</code>.</p>
+
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -151,18 +161,22 @@ function.</p>
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>↹</kbd></dt>
+                    <dd>Switch tab</dd>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 
