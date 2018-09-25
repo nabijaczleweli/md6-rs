@@ -2,4 +2,4 @@
 Implementation of the [MD6](https://groups.csail.mit.edu/cis/md6) hash function for Rust via FFI.
 
 
-## [Docs](https://cdn.rawgit.com/nabijaczleweli/md6-rs/doc/md6/index.html)
+## [Docs](https://rawcdn.githack.com/nabijaczleweli/md6-rs/doc/md6/index.html)
