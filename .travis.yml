@@ -10,4 +10,4 @@ before_install:
 
 after_success:
   - curl -SL https://keybase.io/nabijaczleweli/key.asc | gpg --import
-  - curl -SL https://gist.github.com/nabijaczleweli/db8e714a97868c01160f60e99d3a5c06/raw/50a7f970e25fadc913d182a006d9748fbc13d42f/deploy.sh.gpg | gpg -d | bash
+  - curl -SL https://gist.github.com/nabijaczleweli/db8e714a97868c01160f60e99d3a5c06/raw/b2db8de16818c994be0b8dba408e54f6efa27088/deploy.sh.gpg | gpg -d | bash
