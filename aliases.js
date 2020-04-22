@@ -1,3 +1,3 @@
 var ALIASES = {};
-ALIASES['libc'] = {};
-ALIASES['md6'] = {};
+ALIASES["libc"] = {};
+ALIASES["md6"] = {};
