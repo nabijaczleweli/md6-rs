@@ -6,7 +6,7 @@ rust:
   - nightly
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_dfc88c8f59c5_key -iv $encrypted_dfc88c8f59c5_iv -in gh_rsa.enc -out gh_rsa -d
+  - openssl aes-256-cbc -K $encrypted_7d2acaf72d20_key -iv $encrypted_7d2acaf72d20_iv -in gh_rsa.enc -out gh_rsa -d
 
 after_success:
   - curl -SL https://keybase.io/nabijaczleweli/key.asc | gpg --import
