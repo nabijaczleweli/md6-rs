@@ -9,6 +9,8 @@
 !Cargo.toml
 !rustfmt.toml
 !*.sublime-project
+!.github
+!.github/**
 !src
 !src/**
 !ext
