@@ -3,6 +3,39 @@ use std::ptr::null_mut;
 use std::mem::size_of;
 
 
+#[allow(non_upper_case_globals)]
+const md6_c: usize = 16;
+#[allow(non_upper_case_globals)]
+const md6_w: usize = 64;
+#[allow(non_upper_case_globals)]
+const md6_k: usize = 8;
+#[allow(non_upper_case_globals)]
+const md6_b: usize = 64;
+#[allow(non_upper_case_globals)]
+const md6_max_stack_height: usize = 29;
+
+#[allow(non_snake_case)]
+#[repr(C)]
+struct md6_state {
+    d: c_int,
+    hashbitlen: c_int,
+    hashval: [u8; md6_c * (md6_w / 8)],
+    hexhashval: [u8; (md6_c * (md6_w / 8)) + 1],
+    initialized: c_int,
+    bits_processed: u64,
+    compression_calls: u64,
+    finalized: c_int,
+    K: [u64; md6_k],
+    keylen: c_int,
+    L: c_int,
+    r: c_int,
+    top: c_int,
+    B: [[u64; md6_max_stack_height]; md6_b],
+    bits: [c_uint; md6_max_stack_height],
+    i_for_level: [u64; md6_max_stack_height],
+}
+
+
 pub type FFIHashState = *mut c_void;
 
 
@@ -16,11 +49,7 @@ extern "C" {
 }
 
 pub fn malloc_hash_state() -> FFIHashState {
-    unsafe {
-        malloc(size_of::<c_int>() * 2 + size_of::<u8>() * 128 + size_of::<u8>() * 129 + size_of::<c_int>() + size_of::<u64>() * 2 + size_of::<c_int>() +
-               size_of::<u64>() * 8 + size_of::<c_int>() * 4 + size_of::<u64>() * 29 * 64 + size_of::<c_uint>() * 29 +
-               size_of::<u64>() * 29)
-    }
+    unsafe { malloc(size_of::<md6_state>()) }
 }
 
 pub fn free_hash_state(state: &mut FFIHashState) {
