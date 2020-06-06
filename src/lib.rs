@@ -71,6 +71,7 @@
 //! To all who support further development on [Patreon](https://patreon.com/nabijaczleweli), in particular:
 //!
 //!   * ThePhD
+//!   * Embark Studios
 
 extern crate libc;
 

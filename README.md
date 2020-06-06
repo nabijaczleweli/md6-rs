@@ -8,3 +8,4 @@ Implementation of the [MD6](https://groups.csail.mit.edu/cis/md6) hash function 
 To all who support further development on Patreon, in particular:
 
   * ThePhD
+  * Embark Studios
