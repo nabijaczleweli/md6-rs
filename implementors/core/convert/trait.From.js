@@ -1,3 +1,3 @@
 (function() {var implementors = {};
-implementors["md6"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/convert/trait.From.html\" title=\"trait core::convert::From\">From</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/nightly/std/primitive.i32.html\">i32</a>&gt; for <a class=\"enum\" href=\"md6/enum.Md6Error.html\" title=\"enum md6::Md6Error\">Md6Error</a>","synthetic":false,"types":["md6::Md6Error"]}];
+implementors["md6"] = [{"text":"impl From&lt;i32&gt; for Md6Error","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
