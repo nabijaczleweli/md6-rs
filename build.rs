@@ -1,8 +1,8 @@
-extern crate gcc;
+extern crate cc;
 
 
 fn main() {
-    gcc::Build::new()
+    cc::Build::new()
         .file("ext/md6/md6_compress.c")
         .file("ext/md6/md6_compression_hook.c")
         .file("ext/md6/md6_mode.c")
