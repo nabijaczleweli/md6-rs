@@ -8,7 +8,7 @@ keywords = ["hash", "md6"]
 categories = ["algorithms"]
 license = "MIT"
 # Remember to also update in appveyor.yml
-version = "2.0.2"
+version = "2.0.3"
 authors = ["nabijaczleweli <nabijaczleweli@gmail.com>"]
 exclude = ["*.enc"]
 build = "build.rs"
